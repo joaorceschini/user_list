@@ -1,16 +1,18 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const axios = require('axios');
+const { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
 
 app.use(cors())
 
 app.get('/', async (req, res) => {
-  
+
+  const users = await prisma.user.findMany()
+
   try {
-    const { data } = await axios('https://randomuser.me/api?format=json&results=30&inc=gender,name,email,picture&nat=br&seed=giga');
-    console.log(data.results)
-    return res.json(data.results)
+    return res.json(users)
   } catch (error) {
     console.log(error)
   }
