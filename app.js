@@ -7,16 +7,24 @@ const prisma = new PrismaClient();
 
 app.use(cors())
 
-app.get('/', async (req, res) => {
+
+app.get('/users/:id', async (req, res) => {
 
   const users = await prisma.user.findMany()
 
+  const page = req.params.id;
+  const limit = 5;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const result = users.slice(startIndex, endIndex)
+
+  
   try {
-    return res.json(users)
+    return res.json(result)
   } catch (error) {
     console.log(error)
   }
-
 })
 
 app.listen('4567')
