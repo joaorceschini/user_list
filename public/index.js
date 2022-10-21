@@ -70,7 +70,7 @@ function show(users) {
     output += `
       <li>
         <img src="${user.picture}" alt="User icon">
-        <div class="user_header">
+        <div class="userHeader">
           <p class="name">${user.name}</p>
           <p class="email">${user.email}</p>
           <p class="gender">${user.gender}</p>

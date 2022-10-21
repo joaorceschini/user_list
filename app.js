@@ -13,7 +13,7 @@ app.get('/users/:id', async (req, res) => {
   const users = await prisma.user.findMany()
 
   const page = req.params.id;
-  const limit = 5;
+  const limit = 15;
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
