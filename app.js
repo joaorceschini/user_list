@@ -5,6 +5,8 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
+const port = process.env.PORT || 4567;
+
 app.use(cors())
 
 
@@ -38,4 +40,4 @@ app.get('/users', async (req, res) => {
   }
 })
 
-app.listen('5000')
+app.listen(port)
