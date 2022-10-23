@@ -27,4 +27,15 @@ app.get('/users/:id', async (req, res) => {
   }
 })
 
+app.get('/users', async (req, res) => {
+
+  const users = await prisma.user.findMany()
+  
+  try {
+    return res.json(users)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 app.listen('4567')

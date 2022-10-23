@@ -81,3 +81,27 @@ function show(users) {
 
   document.querySelector(".list").innerHTML = output;
 }
+
+const inputSearch = document.querySelector(".inputSearch");
+
+inputSearch.addEventListener("keyup", ({ key }) => {
+  if (key === "Enter") {
+    if (inputSearch.value.length > 0) {
+      fetch(`http://localhost:4567/users/`).then((response) => {
+        response.json().then((data) => {
+
+          var re = new RegExp(inputSearch.value+'.+$', 'i');
+          
+
+          let userSearch = data.filter((item) => {
+            return item.name.search(re) != -1;
+          })
+
+          show(userSearch)
+          buttonNextPage.disabled = true;
+          buttonPreviousPage.disabled = true;
+        });
+      });
+    }
+  }
+});
